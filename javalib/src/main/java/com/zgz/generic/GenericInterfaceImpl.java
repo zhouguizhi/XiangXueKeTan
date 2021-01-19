@@ -5,7 +5,7 @@ package com.zgz.generic;
  * @CreateDate: 2021/1/19 下午5:25
  * @Version: 1.0
  */
-public class GenericInterfaceImpl<Integer> implements GenericInterfaceTest<Integer>{
+public class GenericInterfaceImpl implements GenericInterfaceTest<Integer>{
     private Integer age;
     @Override
     public void setData(Integer integer) {

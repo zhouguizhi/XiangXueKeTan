@@ -16,4 +16,13 @@ public class SuperGenericClassTest<T> {
     public void setT(T t) {
         this.t = t;
     }
+    public int addInt(int x,int y){
+        return x+y;
+    }
+    public float addFloat(float x,float y){
+        return x+y;
+    }
+//    public <T extends Number> T add(T t1,T t2){
+//        return t1 + t2;
+//    }
 }

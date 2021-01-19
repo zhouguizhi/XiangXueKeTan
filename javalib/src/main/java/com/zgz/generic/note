@@ -1,5 +1,5 @@
 1:泛型是jdk那个版本出现的
-泛型是jdk5出现的
+泛型是jdk5出现的,泛型就是指参数化的类型
 2:为什么要出现泛型
  比如这代码:
  List list = new ArrayList();
@@ -30,6 +30,48 @@
  比如有继承关系的二个类
  public class GenericClassTest<T> extends SuperGenericClassTest<T>
  继承关系的话,要么子类和父类都是<T>也就是未指定具体类型,要么是父类已经指定了其类型,比如
+ public class GenericInterfaceImpl implements GenericInterfaceTest<Integer>
+ 这个是实现类中的接口已经指定了其类型,就是Integer,那么在子类上就不需要<Integer>,带上也没事,使用如下:
+ GenericInterfaceImpl genericInterface = new GenericInterfaceImpl();
+         genericInterface.setData(100);
+         System.out.println(genericInterface.getData(100));
+
+
+5:泛型方法
+public <T> T getData(T...a){
+        return a[a.length/2];
+    }
+    在泛型方法中,必现要有<T> 这是声明泛型方法,
+6:限定类型变量
+ /**
+ * 返回比较中大的值
+ * @return
+ */
+public <T extends Comparable& Serializable> T getResult(T a, T b){
+    return a.compareTo(b)>0?a:b;
+}
+如果是限制多个的话要使用 & 符号,类放在第一个&后面可以放多个接口,比如这样的
+<T extends Comparable& Serializable& List>
+这个规则同样适用泛型类中
+
+7:泛型的约束和局限性
+a:泛型类或者泛型方法不能使用基本类型
+b:在静态的成员变量中不能使用泛型 比如private static T instance;
+c:在静态方法中不能使用泛型
+d:泛型是不能使用instance of的 if(generic1 instanceof TypeLimitGeneric1<String>) 这会报错,在语法层面就不可以,编译其会报错
+e:泛型中可以定义泛型数组,但是不能创建 比如
+TypeLimitGeneric1<String>[] arr;//可以
+arr = new TypeLimitGeneric1<String>[10];//报错
+如果静态方法本来就是一个泛型方法那是可以的,比如下面这代码:
+public static <T> T returnResult(T t){
+        return t;
+    }
+
+why:
+因为泛型指定类型是在对象创建的时候才指定其类型,而静态方法和静态变量是在类加载的时候已经加入到方法区中了.
+
+
+
 
 
 
