@@ -72,6 +72,17 @@ why:
 
 
 
+9: 泛型类型的继承规则
+
+
+10:通配符类型 只能使用在方法上
+1:<? extends Fruit> 传入的是Fruit以及Fruit子类  这是控制上限
+2:<? super Fruit> 传入的是Fruit以及Fruit的父类  这是控制下限
+
+
+
+
+
 
 
 
