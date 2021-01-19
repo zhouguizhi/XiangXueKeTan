@@ -1,0 +1,37 @@
+1:泛型是jdk那个版本出现的
+泛型是jdk5出现的
+2:为什么要出现泛型
+ 比如这代码:
+ List list = new ArrayList();
+        list.add(1);
+        list.add(2);
+        list.add("zhouguizhi");
+        //遍历
+        for(int i=0;i<list.size();i++){
+            Integer integer = (Integer) list.get(i);
+            System.out.println("integer="+integer);
+        }
+        我们在遍历所有的数据的时候,很容易出现类型转换异常,Exception in thread "main" java.lang.ClassCastException: java.lang.String cannot be cast to java.lang.Integer
+        而且这个错误是在运行期间抛出的,会导致程序直接挂掉,肯定是不一个不好的体验.如果有了泛型就可以把这个运行期的错误放到编译期间,大大改善了
+        程序的健壮性,这是泛型其中的一个优点
+
+        泛型的好处就是：
+        A:适用于多种数据类型执行相同的代码
+        B:泛型中的类型在使用时指定，不需要强制类型转换
+ 3:泛型用到哪里
+ A:泛型类
+ B:泛型接口
+ C:泛型方法
+
+ 4:泛型类
+ 就是在类上定义一个泛型
+ 比如:
+ public class GenericClassTest<T>
+ 比如有继承关系的二个类
+ public class GenericClassTest<T> extends SuperGenericClassTest<T>
+ 继承关系的话,要么子类和父类都是<T>也就是未指定具体类型,要么是父类已经指定了其类型,比如
+
+
+
+
+
