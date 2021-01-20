@@ -1,32 +1,18 @@
 package com.zgz.reflect;
 /**
- * @Description: Pesson类
+ * @Description: java类作用描述
  * @Author: zhouguizhi
- * @CreateDate: 2021/1/20 下午3:02
+ * @CreateDate: 2021/1/20 下午3:14
  * @Version: 1.0
  */
 public class Person {
-    private int age;
-    private String name;
+    public int sex;
 
-    public Person(int age, String name) {
-        this.age = age;
-        this.name = name;
+    public int getSex() {
+        return sex;
     }
 
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    public void setSex(int sex) {
+        this.sex = sex;
     }
 }

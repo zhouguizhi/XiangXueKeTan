@@ -10,8 +10,7 @@ import java.lang.annotation.Target;
  * @Version: 1.0
  */
 @Target(ElementType.TYPE)
-@Retention(RetentionPolicy.CLASS)
+@Retention(RetentionPolicy.RUNTIME)
 public @interface AnnotationType {
-    String result() default "zhouguizhi";
     int age();
 }

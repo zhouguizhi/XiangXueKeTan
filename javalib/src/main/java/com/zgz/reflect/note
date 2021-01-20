@@ -4,3 +4,22 @@
 Class对象方法总结
 getName():获取类名,全路径包含包名
 getSimpleName():获取类名,不包含包名
+getPackage():获取类所在的包,返回的是Package对象,这个对象里面包含包一些信息,比如包名,包上的注解等等
+getDeclaredFields():获取所有自己定义的属性,对属性的修饰符没有任何限制
+getFields():获取public定义的属性,包含父类定义的
+getSuperclass():获取父类的Class对象,如果它有多个父类的话,就获取它直接继承的父类
+getDeclaredField(String var1):获取某一个单一的属性,要求是传递属性名,比如这样的,Field fieldAge = personClass.getDeclaredField("age");
+getField(String var1):获取public修饰的本类以及父类的属性,如果是获取private修饰的,程序会报错
+getAnnotations():获取这个类上所有的注解
+getConstructors():获取该类所定义的所有构造函数
+getConstructor(Class<?>... var1):获取某一个构造函数,通过传递构造函数的参数
+getDeclaredMethods():获取所有的方法,但不包含父类的
+getMethods():获取类上定义的所有public修饰的方法,包含父类的方法以及Object中的方法
+
+
+
+使用场景
+我们在网络请求的时候,需要获取上层传递到网络层真实的泛型类型,不管是泛型接口还是泛型类
+
+
+
