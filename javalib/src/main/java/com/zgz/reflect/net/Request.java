@@ -11,7 +11,6 @@ import java.lang.reflect.Type;
 public class Request {
     private Request() {
     }
-
     /**
      *模拟Callback是接口如何获取接口上泛型的具体类型
      * @param callback
