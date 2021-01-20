@@ -76,8 +76,23 @@ why:
 
 
 10:通配符类型 只能使用在方法上
-1:<? extends Fruit> 传入的是Fruit以及Fruit子类  这是控制上限
+1:<? extends Fruit> 传入的是Fruit以及Fruit子类  这是控制上限 ,这个只能读取数据,不能写入数据,比如
+ GenericType<? extends Fruit> c =  new GenericType<>();
+ Fruit x = c.getData();//可以
+ c.setData(new Fruit());//报错
+ 所以<? extends Fruit> 只能安全的读取数据,不能访问数据,原因是:因为? extends Fruit 获取的是Fruit,根据java动态的原理,子类引用指向父类,但是你要写入数据的话,
 2:<? super Fruit> 传入的是Fruit以及Fruit的父类  这是控制下限
+这个刚好和? extends Fruit 相反, ? super Fruit只能写入数据,不能读取数据
+
+
+11:虚拟机是如何实现泛型的
+
+12:泛型擦除在什么阶段,为什么擦除后,在运行期还能使用
+
+
+13:总结
+泛型在框架中大量的可以看到泛型的存在,比如MVP,MVVM中如果要写框架的话,肯定是要用到泛型,还有比如jdk中的List Map
+等都会用到泛型,比如网络请求也会用到泛型,不过要通过反射去读取泛型的真实类型
 
 
 

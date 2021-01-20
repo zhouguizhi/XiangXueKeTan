@@ -24,17 +24,19 @@ public class WildChar{
 
     public static void use2(){
         GenericType<Fruit> a = new GenericType<>();
+
         print2(a);
         GenericType<Orange> b = new GenericType<>();
         print2(b);
         //print2(new GenericType<Food>());
         GenericType<? extends Fruit> c =  new GenericType<>();
-
+//        c.setData(new Fruit());
         Apple apple =  new Apple();
         Fruit fruit = new Fruit();
         //c.setData(apple);
         //c.setData(fruit);
         Fruit x = c.getData();
+//        c.setData(new Fruit());
     }
 
     public static void printSuper(GenericType<? super Apple> p){

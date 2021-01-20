@@ -1,0 +1,6 @@
+反射
+
+
+Class对象方法总结
+getName():获取类名,全路径包含包名
+getSimpleName():获取类名,不包含包名
