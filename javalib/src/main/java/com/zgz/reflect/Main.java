@@ -1,8 +1,8 @@
 package com.zgz.reflect;
 import com.zgz.reflect.bean.OrderBean;
 import com.zgz.reflect.net.Callback;
+import com.zgz.reflect.net.ICallback;
 import com.zgz.reflect.net.Request;
-
 import java.lang.reflect.Field;
 /**
  * @Description: 反射测试类
@@ -86,6 +86,13 @@ public class Main {
             @Override
             public void onFail() {
 
+            }
+        });
+        //这个ICallback是接口
+        Request.login("zhouguizhi", new ICallback<OrderBean>() {
+            @Override
+            public void onSuccess(OrderBean orderBean) {
+                System.out.println("orderBean:="+orderBean);
             }
         });
     }

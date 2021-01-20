@@ -5,7 +5,7 @@ package com.zgz.reflect.net;
  * @CreateDate: 2021/1/20 下午4:18
  * @Version: 1.0
  */
-public interface Callback<T> {
-    void onSuccess(T t);
-    void onFail();
+public  abstract  class Callback<T>{
+    public abstract void onSuccess(T t);
+    public abstract void onFail();
 }
