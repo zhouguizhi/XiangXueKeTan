@@ -1,0 +1,31 @@
+1:注解单独存在是没有任何意义的,单独存在只表示一个标签
+2:注解很多情况下是和反射一起使用的,注解可以使用在类 方法  变量上
+3:元注解:是注解上的注解
+4:注解简单的定义
+@Target(ElementType.TYPE)
+@Retention(RetentionPolicy.CLASS)
+public @interface AnnotationType {
+    String value();
+}
+上面的value是默认的写法,当然我们也可以改,
+String result();
+在这个方法后面还可以支持添加默认值
+ String result() default "zhouguizhi";
+ 那么在使用的时候就没必要一定要指定值了,可以这么写
+@AnnotationType
+public class Main {}
+当然我们自己加上也行,比如这样
+@AnnotationType(result = "hehe")
+public class Main {}
+如果没有默认值,我们在使用的时候,一定要指定其值
+还有如果注解中是定义了多个参数的话,比如这样
+@Target(ElementType.TYPE)
+@Retention(RetentionPolicy.CLASS)
+public @interface AnnotationType {
+    String result() default "zhouguizhi";
+    int age();
+}
+那么我们在使用的时候,一定要全部写全,除非是每个定义的变量都赋值了默认变量值,那可以不写, 注解中多个变量使用方法:
+@AnnotationType(result = "hehe",age = 18)
+
+
