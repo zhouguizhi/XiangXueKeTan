@@ -29,3 +29,67 @@ public @interface AnnotationType {
 @AnnotationType(result = "hehe",age = 18)
 
 
+5
+@Target(ElementType.TYPE)
+@Retention(RetentionPolicy.CLASS)
+我们使用注解的时候,肯定要知道注解作用域哪里?类,方法,变量,局部变量
+那么我们就可以使用@Target注解告诉我们自定义的注解作用于哪里,Target就是目标的意思
+ElementType是一个枚举,它里面定义如下
+public enum ElementType {
+    TYPE,
+    FIELD,
+    METHOD,
+    PARAMETER,
+    CONSTRUCTOR,
+    LOCAL_VARIABLE,
+    ANNOTATION_TYPE,
+    PACKAGE,
+    TYPE_PARAMETER,
+    TYPE_USE;
+
+    private ElementType() {
+    }
+}
+那下面分别对上面的变量进行分析
+ @Target(ElementType.TYPE) //接口、类、枚举、注解
+ @Target(ElementType.FIELD) //字段、枚举的常量
+ @Target(ElementType.METHOD) //方法
+ @Target(ElementType.PARAMETER) //方法参数
+ @Target(ElementType.CONSTRUCTOR) //构造函数
+ @Target(ElementType.LOCAL_VARIABLE)//局部变量 
+ @Target(ElementType.ANNOTATION_TYPE)//注解
+ @Target(ElementType.PACKAGE) ///包
+
+6:@Retention注解的作用时机
+分别有三个变量
+public enum RetentionPolicy {
+    SOURCE,
+    CLASS,
+    RUNTIME;
+
+    private RetentionPolicy() {
+    }
+}
+SOURCE:作用域文档中,如果使用eclipse开发可以导出一个javadoc,我们就很清楚的看到了,SOURCE在javac生成class文件后,这些注解就没有了
+CLASS:在class文件中有效,我们可以在生成的.class文件中去看看编译后的文件是否存在注解,也可以使用工具把编译后的.class文件打开,但是.class
+被翻译成机器指令被JVM虚拟机执行的时候,会被忽略,所以它不能通过反射去获取到注解
+RUNTIME:在运行期间,这样我们就可以结合反射技术
+
+根据注解保留级别不同,对注解的使用场景自然也不同,由注解三个不同的保留级别可知,注解可作用于,源码, 字节码,运行时.
+级别	         技术	       说明
+源码	         APT	        在编译期能够获取注解与注解声明的类包括类中所有成员信息，一般用于生成额外的辅助类。
+字节码	     字节码增强	    在编译出Class后，通过修改Class数据以实现修改代码逻辑目的。对于是否需要修改的区分或者修改为不同逻辑的判断可以使用注解。
+运行时	     反射	        在程序运行期间，通过反射技术动态获取注解与其元素，从而完成不同的逻辑判定
+
+
+
+
+
+
+
+
+
+
+
+
+
