@@ -1,0 +1,59 @@
+jetpack介绍
+Jetpack 是一个由多个库组成的套件，可帮助开发者遵循最佳做法，减少样板代码并编写可在各种 Android 版本和设备中一致运行的代码，
+让开发者精力集中编写重要的代码
+
+jetpack，有很多库,所有库在官网地址如下:https://developer.android.google.cn/jetpack/androidx/explorer?hl=zh_cn
+但是我们不可能学习完所有的库,肯定是先把重要的先学完,以后用到什么就去查
+
+LifeCycle:这个类是监听fragment或者Activity生命周期的,它的实现原理是观察者模式,
+我们写的Activity是被观察者,它实现了LifecycleOwner接口,我们知道Activity是继承了AppCompatActivity,而AppCompatActivity继承了
+FragmentActivity,FragmentActivity又继承了ComponentActivity,而ComponentActivity实现了LifecycleOwner接口,我们看下这个LifecycleOwner
+接口代码写了啥,
+public interface LifecycleOwner {
+    /**
+     * Returns the Lifecycle of the provider.
+     *
+     * @return The lifecycle of the provider.
+     */
+    @NonNull
+    Lifecycle getLifecycle();
+}
+就一个方法,返回Lifecycle,而Lifecycle是一个抽象类,
+上面说的是被观察者,那观察者要怎么实现呢? 那只要实现LifecycleObserver就行,而LifecycleObserver接口,里面并没有有任何方法,这就奇怪了
+public interface LifecycleObserver {
+
+}
+我们可以写一个例子,
+现在问题来了,观察者和被观察者怎么绑定在一起呢?
+在被观察者里面,这么写就绑定了
+getLifecycle().addObserver(new CustomLifecycleObserver());
+
+如果不知道观察者里面怎么写,可以看看Lifecycle类上的注释,就大概怎么知道写了,比如要监听onCreate()方法
+public class CustomLifecycleObserver implements LifecycleObserver {
+     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
+     void onCreate() {
+         Log.e("zhouguizhi","Activity被创建了");
+    }
+}
+现在整理下,我们的Actiivty是被观察者,自定义类实现LifecycleObserver是观察者,二者绑定是通过
+getLifecycle().addObserver(new CustomLifecycleObserver());
+这样就让观察者和被观察者实现了解耦,类和类之间依赖没那么强了,那如取消绑定呢?
+getLifecycle().removeObserver(customLifecycleObserver);
+上面就是取消绑定的
+不会涉及到其他类的改动
+
+之前在MVP架构中,我们要在presenter中持有view的弱应用,现在有了LifeCycle,直接让presenter实现LifecycleObserver(),就能很好的解决这个问题了
+
+上面讲的是用法,但是原理是怎么实现的呢?
+我们从getLifecycle().addObserver(new CustomLifecycleObserver());
+这个addObserver点击进去,
+@MainThread
+public abstract void addObserver(@NonNull LifecycleObserver observer);
+这是点击到了LifeCycle中的addObserver()方法,从这个方法中我们看到它的注解,是运行在主线程中的,
+既然addObserver一个抽象方法, 那么我们就找到它的具体实现,是在LifecycleRegistry类中,看下这个类的addObserver()方法
+
+
+
+
+
+
