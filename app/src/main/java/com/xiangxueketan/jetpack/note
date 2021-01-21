@@ -54,6 +54,23 @@ public abstract void addObserver(@NonNull LifecycleObserver observer);
 
 
 
+LiveData
+是一种存储数据,存储活着的数据,它是一个观察者,也是一个被观察者
+LiveData是一个抽象类,我们要使用它的时候要找出它的子类,它的子类是MutableLiveData
+public class MutableLiveData<T> extends LiveData<T> {
+    @Override
+    public void postValue(T value) {
+        super.postValue(value);
+    }
+
+    @Override
+    public void setValue(T value) {
+        super.setValue(value);
+    }
+}
+
+
+
 
 
 

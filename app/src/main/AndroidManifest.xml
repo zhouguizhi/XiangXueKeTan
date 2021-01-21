@@ -19,6 +19,7 @@
         <activity android:name=".hook.HookActivity"/>
         <activity android:name=".jetpack.lifecycle.LifeCycleActivity"/>
         <activity android:name=".glide.GlideActivity"/>
+        <activity android:name=".jetpack.livedata.LiveDataActivity"/>
     </application>
 
 </manifest>

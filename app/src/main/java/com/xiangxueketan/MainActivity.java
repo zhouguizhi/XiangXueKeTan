@@ -6,6 +6,7 @@ import android.view.View;
 import com.xiangxueketan.glide.GlideActivity;
 import com.xiangxueketan.hook.HookActivity;
 import com.xiangxueketan.jetpack.lifecycle.LifeCycleActivity;
+import com.xiangxueketan.jetpack.livedata.LiveDataActivity;
 
 public class MainActivity extends AppCompatActivity {
     @Override
@@ -23,5 +24,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void onGlideClickListener(View view) {
         startActivity(new Intent(this, GlideActivity.class));
+    }
+
+    public void onLiveDataClickListener(View view) {
+        startActivity(new Intent(this, LiveDataActivity.class));
     }
 }
