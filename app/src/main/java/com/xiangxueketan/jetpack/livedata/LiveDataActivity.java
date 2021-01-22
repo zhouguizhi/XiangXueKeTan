@@ -1,8 +1,8 @@
 package com.xiangxueketan.jetpack.livedata;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -39,12 +39,19 @@ public class LiveDataActivity extends AppCompatActivity {
                 changText();
             }
         });
+        LiveDataBus.getInstance().register("data",String.class).observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                Log.e("zhouguizhi","s:>>>>"+s);
+            }
+        });
     }
     public void changText(){
         new Thread(){
             @Override
             public void run() {
                 super.run();
+                LiveDataBus.getInstance().register("data",String.class).postValue("jsjsjjsjsjsjs");
                 nameViewModel.getCurrentName().postValue("我是在子线程中更新的");
             }
         }.start();
