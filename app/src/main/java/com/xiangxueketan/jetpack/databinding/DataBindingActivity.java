@@ -15,7 +15,6 @@ public class DataBindingActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_data_bind);
         ViewDataBinding viewDataBinding =  DataBindingUtil.setContentView(this,R.layout.activity_data_bind);
     }
 }
