@@ -55,7 +55,8 @@ public abstract void addObserver(@NonNull LifecycleObserver observer);
 
 
 LiveData
-是一种存储数据,存储活着的数据,它是一个观察者,也是一个被观察者
+是一种存储数据,存储活着的数据,它是一个观察者,也是一个被观察者,因为它能观察Activity,Fragment生命周期变化,也能观察到数据的变化
+LiveData一般是配合ViewModel一起使用, 很少单独使用
 LiveData是一个抽象类,我们要使用它的时候要找出它的子类,它的子类是MutableLiveData
 public class MutableLiveData<T> extends LiveData<T> {
     @Override
@@ -68,8 +69,59 @@ public class MutableLiveData<T> extends LiveData<T> {
         super.setValue(value);
     }
 }
+postValue是在子线程中发送数据,setValue是在主线程中发送数据
+使用ViewModel 不需要导入其他的库,androidx已经自带了
 
+ViewModel的创建是需要viewModelProvider类,通过get(),这个在早期的ViewModelProvider通过哦静态方法of()就可以创建
+现在版本不行了,那我们看下ViewModelProvider的构造函数,
+ public ViewModelProvider(@NonNull ViewModelStoreOwner owner, @NonNull Factory factory) {
+        this(owner.getViewModelStore(), factory);
+    }
+需要二个参数
+第一个参数:ViewModelStoreOwner,我们发现Activity其实已经ViewModelStoreOwner,源码在这里:
+public class ComponentActivity extends androidx.core.app.ComponentActivity implements
+        LifecycleOwner,
+        ViewModelStoreOwner,
+        SavedStateRegistryOwner,
+        OnBackPressedDispatcherOwner {
+那么第一个参数传递this就可以,
+第二个参数:Factory factory,我们看下注释
+a {@code Factory} which will be used to instantiate
+     *                new {@code ViewModels}
+意思是用那个实体创建ViewModel对象,Factory是一个接口
+public interface Factory {
+        /**
+         * Creates a new instance of the given {@code Class}.
+         * <p>
+         *
+         * @param modelClass a {@code Class} whose instance is requested
+         * @param <T>        The type parameter for the ViewModel.
+         * @return a newly created ViewModel
+         */
+        @NonNull
+        <T extends ViewModel> T create(@NonNull Class<T> modelClass);
+    }
+那我们只有新建一个类去实现这个接口了
+ public class NameViewModelFactory implements ViewModelProvider.Factory {
+        @NonNull
+        @Override
+        public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
+            try {
+                return modelClass.newInstance(); //使用newInstance反射实例ViewModel，并且传出去
+            } catch (IllegalAccessException | java.lang.InstantiationException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+    }
+绑定数据是通过LiveData
+nameViewModel.getCurrentName().observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
 
+            }
+        });
+这是LiveData监听数据,当数据有变化的时候,会在onChanged()中回调
 
 
 
