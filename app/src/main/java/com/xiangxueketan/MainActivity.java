@@ -3,6 +3,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+
+import com.xiangxueketan.jetpack.databinding.DataBindingActivity;
 import com.xiangxueketan.glide.GlideActivity;
 import com.xiangxueketan.hook.HookActivity;
 import com.xiangxueketan.jetpack.lifecycle.LifeCycleActivity;
@@ -29,7 +31,12 @@ public class MainActivity extends AppCompatActivity {
 
     public void onLiveDataClickListener(View view) {
         //从这验证LiveData有粘性事件,点击的时候LiveDataActivity都还没创建,但是在LiveDataActivity监听确实得到了发送的数据
-        LiveDataBus.getInstance().register("data",String.class).postValue("我是在MainActivity发送的数据");
         startActivity(new Intent(this, LiveDataActivity.class));
+        LiveDataBus.getInstance().register("data",String.class).postValue("我是在MainActivity发送的数据");
+    }
+
+    public void onDataBindingClickListener(View view) {
+        startActivity(new Intent(this, DataBindingActivity.class));
+
     }
 }

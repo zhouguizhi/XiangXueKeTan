@@ -20,6 +20,7 @@
         <activity android:name=".jetpack.lifecycle.LifeCycleActivity"/>
         <activity android:name=".glide.GlideActivity"/>
         <activity android:name=".jetpack.livedata.LiveDataActivity"/>
+        <activity android:name=".jetpack.databinding.DataBindingActivity"/>
     </application>
 
 </manifest>

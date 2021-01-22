@@ -121,7 +121,14 @@ nameViewModel.getCurrentName().observe(this, new Observer<String>() {
 
             }
         });
-这是LiveData监听数据,当数据有变化的时候,会在onChanged()中回调
+这是LiveData监听数据,当数据有变化的时候,会在onChanged()中回调,
+LiveDataBus出现粘性事件是跟我们使用的顺序有关系的
+我们正常使用的流程是这样的:
+new LiveData--->绑定Observer---->setValue()----->onChanged()
+而出现粘性事件的顺序流程是这样的:
+new LiveData---->setValue()----绑定Observer---->onChanged()
+那如何解决这个粘性事件呢?
+这就要看
 
 
 

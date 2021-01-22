@@ -1,0 +1,10 @@
+DataBinding
+要使用DataBinging首先要在build.gradle文件中添加插件
+在android的节点下添加如下:
+dataBinding{
+    enabled=true
+}
+就可以使用DataBinding了,要使用DataBinding首先改的是布局文件,如何修改布局,让它成为支持DataBinding写法呢?
+mac:option+enter健,然后选择convert to data bing layout就行了
+
+
