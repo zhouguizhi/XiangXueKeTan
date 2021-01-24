@@ -10,6 +10,7 @@ import com.xiangxueketan.hook.HookActivity;
 import com.xiangxueketan.jetpack.lifecycle.LifeCycleActivity;
 import com.xiangxueketan.jetpack.livedata.LiveDataActivity;
 import com.xiangxueketan.jetpack.livedata.LiveDataBus;
+import com.xiangxueketan.mvvm.v1.ui.MVVMActivity;
 
 public class MainActivity extends AppCompatActivity {
     @Override
@@ -38,5 +39,9 @@ public class MainActivity extends AppCompatActivity {
     public void onDataBindingClickListener(View view) {
         startActivity(new Intent(this, DataBindingActivity.class));
 
+    }
+
+    public void onMvvmClickListener(View view) {
+        startActivity(new Intent(this, MVVMActivity.class));
     }
 }

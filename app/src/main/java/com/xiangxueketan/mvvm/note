@@ -1,3 +1,17 @@
 MVC:
 MVP:
 MVVM:
+
+ 错误：
+ java.net.UnknownServiceException: CLEARTEXT communication to service-o5ikp40z-1255468759.ap-shanghai.apigateway.myqcloud.com not permitted by network security policy
+ 产生的原因:
+ 因为安全原因，Google针对Android 9.0 的应用程序，将要求默认使用加密连接。
+ 因此在Android 9.0 使用HttpUrlConnection进行http请求会出现以下异常
+ W/System.err: java.io.IOException: Cleartext HTTP traffic to **** not permitted
+ 使用OKHttp请求则出现
+ java.net.UnknownServiceException: CLEARTEXT communication ** not permitted by network security policy
+
+ 针对这个问题，有以下三种解决方法：
+ 1）APP改用https请求
+ 2）targetSdkVersion 和 compileSdkVersion 降到27以下
+ 3）

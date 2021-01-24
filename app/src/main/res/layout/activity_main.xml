@@ -71,5 +71,17 @@
             android:background="@color/colorAccent"
             android:layout_marginTop="10dp"
             />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="mvvm"
+            android:padding="10dp"
+            android:gravity="center"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:onClick="onMvvmClickListener"
+            android:background="@color/colorAccent"
+            android:layout_marginTop="10dp"
+            />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
