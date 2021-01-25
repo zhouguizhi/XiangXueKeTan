@@ -12,28 +12,83 @@ import java.util.List;
  * @Version: 1.0
  */
 public class NewsListBean extends TecentBaseResponse {
+    public class Contentlist {
+        @SerializedName("allList")
+        @Expose
+        public List<String> allList = null;
+        @SerializedName("pubDate")
+        @Expose
+        public String pubDate;
+        @SerializedName("title")
+        @Expose
+        public String title;
+        @SerializedName("channelName")
+        @Expose
+        public String channelName;
+        @SerializedName("imageurls")
+        @Expose
+        public List<ImageUrl> imageurls = null;
+        @SerializedName("desc")
+        @Expose
+        public String desc;
+        @SerializedName("source")
+        @Expose
+        public String source;
+        @SerializedName("channelId")
+        @Expose
+        public String channelId;
+        @SerializedName("nid")
+        @Expose
+        public String nid;
+        @SerializedName("link")
+        @Expose
+        public String link;
+    }
+
     @SerializedName("showapi_res_body")
     @Expose
     public ShowapiResBody showapiResBody;
 
-    public class ChannelList {
-        @SerializedName("channelId")
+    public class Pagebean {
+
+        @SerializedName("allPages")
         @Expose
-        public String channelId;
-        @SerializedName("name")
+        public Integer allPages;
+        @SerializedName("contentlist")
         @Expose
-        public String name;
+        public List<Contentlist> contentlist = null;
+        @SerializedName("currentPage")
+        @Expose
+        public Integer currentPage;
+        @SerializedName("allNum")
+        @Expose
+        public Integer allNum;
+        @SerializedName("maxResult")
+        @Expose
+        public Integer maxResult;
+    }
+
+    public class ImageUrl {
+
+        @SerializedName("height")
+        @Expose
+        public String height;
+        @SerializedName("width")
+        @Expose
+        public String width;
+
+        @SerializedName("url")
+        @Expose
+        public String url;
     }
 
     public class ShowapiResBody {
-        @SerializedName("totalNum")
-        @Expose
-        public Integer totalNum;
+
         @SerializedName("ret_code")
         @Expose
         public Integer retCode;
-        @SerializedName("channelList")
+        @SerializedName("pagebean")
         @Expose
-        public List<ChannelList> channelList = null;
+        public Pagebean pagebean;
     }
 }

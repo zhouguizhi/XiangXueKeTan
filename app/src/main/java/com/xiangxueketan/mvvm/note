@@ -15,3 +15,6 @@ MVVM:
  1）APP改用https请求
  2）targetSdkVersion 和 compileSdkVersion 降到27以下
  3）
+
+
+ 控件化的意思是自定义view,因为自定义view会去封装它的逻辑, 满足单一职责原则,不应该在一个类中写所有的逻辑,这样代码可读性以及可维护性比较差,

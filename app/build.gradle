@@ -22,6 +22,10 @@ android {
     dataBinding{
         enabled=true
     }
+    compileOptions {
+        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
@@ -46,6 +50,7 @@ dependencies {
     // explicitly depend on RxJava's latest version for bug fixes and new features.
     // (see https://github.com/ReactiveX/RxJava/releases for latest 2.x.x version)
     api 'io.reactivex.rxjava2:rxjava:2.2.12'
+    implementation 'com.hjq:xxpermissions:9.8'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
     implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-7'
     implementation 'com.scwang.smartrefresh:SmartRefreshHeader:1.1.0-alpha-7'//没有使用特殊Header，可以不加这行
