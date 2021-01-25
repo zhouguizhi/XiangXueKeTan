@@ -9,9 +9,12 @@ import androidx.recyclerview.widget.RecyclerView;
  * @Version: 1.0
  */
 public class BaseViewHolder extends RecyclerView.ViewHolder {
-    private View itemView;
+    private BaseCustomView itemView;
     public BaseViewHolder(@NonNull View itemView) {
         super(itemView);
-        this.itemView = itemView;
+        this.itemView = (BaseCustomView) itemView;
+    }
+    public void bind(BaseCustomViewModel viewModel) {
+        itemView.setData(viewModel);
     }
 }

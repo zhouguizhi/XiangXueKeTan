@@ -7,7 +7,6 @@ import com.xiangxueketan.mvvm.v1.base.BaseViewHolder;
 import com.xiangxueketan.mvvm.v1.fragment.views.pictruetitleview.PictureView;
 import com.xiangxueketan.mvvm.v1.fragment.views.pictruetitleview.PictureViewModel;
 import com.xiangxueketan.mvvm.v1.fragment.views.titleview.TitleView;
-import com.xiangxueketan.mvvm.v1.fragment.views.titleview.TitleViewModel;
 import java.util.List;
 /**
  * @Description: java类作用描述
@@ -15,8 +14,7 @@ import java.util.List;
  * @CreateDate: 2021/1/24 下午9:27
  * @Version: 1.0
  */
-public class NewsListRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-
+public class NewsListRecyclerViewAdapter extends RecyclerView.Adapter<BaseViewHolder> {
     private final int VIEW_TYPE_PICTURE_TITLE = 1;
     private final int VIEW_TYPE_TITLE = 2;
     private List<BaseCustomViewModel> mItems;
@@ -42,7 +40,7 @@ public class NewsListRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
     }
 
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == VIEW_TYPE_PICTURE_TITLE) {
             return new BaseViewHolder(new PictureView(parent.getContext()));
         } else if (viewType == VIEW_TYPE_TITLE) {
@@ -51,12 +49,7 @@ public class NewsListRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
         return null;
     }
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        if(holder.itemView instanceof PictureView){
-            ((PictureView)holder.itemView).setPictureModel((PictureViewModel) mItems.get(position));
-        } else if(holder.itemView instanceof TitleView) {
-            ((TitleView)holder.itemView).setTitleModel((TitleViewModel) mItems.get(position));
-
-        }
+    public void onBindViewHolder(@NonNull BaseViewHolder holder, int position) {
+        holder.bind(mItems.get(position));
     }
 }
