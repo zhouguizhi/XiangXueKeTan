@@ -25,10 +25,7 @@ public class NewsListRecyclerViewAdapter extends RecyclerView.Adapter<BaseViewHo
     }
     @Override
     public int getItemCount() {
-        if (mItems != null) {
-            return mItems.size();
-        }
-        return 0;
+        return null!=mItems?mItems.size():0;
     }
 
     @Override

@@ -3,7 +3,7 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 /**
- * @Description: java类作用描述
+ * @Description: ViewHolder
  * @Author: zhouguizhi
  * @CreateDate: 2021/1/24 下午11:07
  * @Version: 1.0
