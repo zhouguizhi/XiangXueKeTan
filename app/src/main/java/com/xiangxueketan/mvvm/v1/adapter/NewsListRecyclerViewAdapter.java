@@ -6,7 +6,7 @@ import com.xiangxueketan.mvvm.v1.base.BaseCustomViewModel;
 import com.xiangxueketan.mvvm.v1.base.BaseViewHolder;
 import com.xiangxueketan.mvvm.v1.fragment.views.pictruetitleview.PictureView;
 import com.xiangxueketan.mvvm.v1.fragment.views.pictruetitleview.PictureViewModel;
-import com.xiangxueketan.mvvm.v1.fragment.views.titleview.TitleViewI;
+import com.xiangxueketan.mvvm.v1.fragment.views.titleview.TitleView;
 import java.util.List;
 /**
  * @Description: java类作用描述
@@ -41,7 +41,7 @@ public class NewsListRecyclerViewAdapter extends RecyclerView.Adapter<BaseViewHo
         if (viewType == VIEW_TYPE_PICTURE_TITLE) {
             return new BaseViewHolder(new PictureView(parent.getContext()));
         } else if (viewType == VIEW_TYPE_TITLE) {
-            return new BaseViewHolder(new TitleViewI(parent.getContext())) ;
+            return new BaseViewHolder(new TitleView(parent.getContext())) ;
         }
         return null;
     }

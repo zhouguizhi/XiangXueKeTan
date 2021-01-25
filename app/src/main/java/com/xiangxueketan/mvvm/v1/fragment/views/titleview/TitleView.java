@@ -9,8 +9,8 @@ import com.xiangxueketan.mvvm.v1.base.BaseView;
  * @CreateDate: 2021/1/24 下午10:05
  * @Version: 1.0
  */
-public class TitleViewI extends BaseView<TitleViewBinding,TitleViewModel>{
-    public TitleViewI(Context context) {
+public class TitleView extends BaseView<TitleViewBinding,TitleViewModel>{
+    public TitleView(Context context) {
         super(context);
     }
     @Override
