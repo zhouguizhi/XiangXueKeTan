@@ -12,10 +12,11 @@ import androidx.databinding.ViewDataBinding;
  * @CreateDate: 2021/1/24 下午11:33
  * @Version: 1.0
  */
-public abstract class BaseView<T extends ViewDataBinding> extends LinearLayout {
+public abstract class BaseView<T extends ViewDataBinding,D extends BaseCustomViewModel> extends LinearLayout implements IBaseCustomView<D>{
     public Context mContext;
     public LayoutInflater layoutInflater;
     public T mBinding;
+    public D mViewModel;
     public BaseView(Context context) {
         this(context,null);
     }
@@ -33,4 +34,12 @@ public abstract class BaseView<T extends ViewDataBinding> extends LinearLayout {
     }
     public abstract void init();
     public abstract int layoutId();
+
+    @Override
+    public void setData(D data) {
+        bindDataToView(data);
+        mBinding.executePendingBindings();
+        this.mViewModel = data;
+    }
+    public abstract void bindDataToView(D d);
 }

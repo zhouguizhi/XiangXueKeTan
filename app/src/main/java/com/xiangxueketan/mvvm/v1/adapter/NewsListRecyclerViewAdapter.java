@@ -4,7 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.xiangxueketan.mvvm.v1.base.BaseCustomViewModel;
 import com.xiangxueketan.mvvm.v1.base.BaseViewHolder;
-import com.xiangxueketan.mvvm.v1.fragment.views.pictruetitleview.PictureViewI;
+import com.xiangxueketan.mvvm.v1.fragment.views.pictruetitleview.PictureView;
 import com.xiangxueketan.mvvm.v1.fragment.views.pictruetitleview.PictureViewModel;
 import com.xiangxueketan.mvvm.v1.fragment.views.titleview.TitleViewI;
 import java.util.List;
@@ -39,7 +39,7 @@ public class NewsListRecyclerViewAdapter extends RecyclerView.Adapter<BaseViewHo
     @Override
     public BaseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         if (viewType == VIEW_TYPE_PICTURE_TITLE) {
-            return new BaseViewHolder(new PictureViewI(parent.getContext()));
+            return new BaseViewHolder(new PictureView(parent.getContext()));
         } else if (viewType == VIEW_TYPE_TITLE) {
             return new BaseViewHolder(new TitleViewI(parent.getContext())) ;
         }
