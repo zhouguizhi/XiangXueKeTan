@@ -2,7 +2,7 @@ package com.xiangxueketan.mvvm.v1.fragment.views.pictruetitleview;
 import android.content.Context;
 import com.xiangxueketan.R;
 import com.xiangxueketan.databinding.PictureTitleViewBinding;
-import com.xiangxueketan.mvvm.v1.base.BaseCustomView;
+import com.xiangxueketan.mvvm.v1.base.IBaseCustomView;
 import com.xiangxueketan.mvvm.v1.base.BaseView;
 /**
  * @Description: java类作用描述
@@ -10,9 +10,9 @@ import com.xiangxueketan.mvvm.v1.base.BaseView;
  * @CreateDate: 2021/1/24 下午11:33
  * @Version: 1.0
  */
-public class PictureView extends BaseView<PictureTitleViewBinding> implements BaseCustomView<PictureViewModel> {
+public class PictureViewI extends BaseView<PictureTitleViewBinding> implements IBaseCustomView<PictureViewModel> {
     private PictureViewModel mPictureViewModel;
-    public PictureView(Context context) {
+    public PictureViewI(Context context) {
         super(context);
     }
     @Override

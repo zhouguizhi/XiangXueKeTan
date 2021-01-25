@@ -5,6 +5,6 @@ package com.xiangxueketan.mvvm.v1.base;
  * @CreateDate: 2021/1/25 上午10:02
  * @Version: 1.0
  */
-public interface BaseCustomView<D extends BaseCustomViewModel> {
+public interface IBaseCustomView<D extends BaseCustomViewModel> {
     void setData(D d);
 }
