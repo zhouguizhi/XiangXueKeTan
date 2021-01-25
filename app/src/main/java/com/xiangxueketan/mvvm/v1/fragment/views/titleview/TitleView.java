@@ -1,5 +1,6 @@
 package com.xiangxueketan.mvvm.v1.fragment.views.titleview;
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import com.xiangxueketan.R;
 import com.xiangxueketan.databinding.TitleViewBinding;
@@ -28,6 +29,6 @@ public class TitleView extends BaseView<TitleViewBinding,TitleViewModel>{
 
     @Override
     public void onRootClickListener(View view) {
-
+        Log.e("zhouguizhi","点击了view");
     }
 }

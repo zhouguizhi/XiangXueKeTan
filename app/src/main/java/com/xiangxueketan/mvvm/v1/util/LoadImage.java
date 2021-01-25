@@ -1,5 +1,4 @@
 package com.xiangxueketan.mvvm.v1.util;
-import android.util.Log;
 import android.widget.ImageView;
 import androidx.databinding.BindingAdapter;
 import com.bumptech.glide.Glide;
@@ -12,7 +11,6 @@ import com.bumptech.glide.Glide;
 public class LoadImage {
     @BindingAdapter("loadImageUrl")
     public static void loadImageUrl(ImageView imageView,String pictureUrl){
-        Log.e("zhouguizhi","pictureUrl:>>>>"+pictureUrl);
         Glide.with(imageView.getContext())
                 .load(pictureUrl)
                 .into(imageView);
