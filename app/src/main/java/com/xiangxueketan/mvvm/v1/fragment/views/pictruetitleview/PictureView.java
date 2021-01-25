@@ -1,5 +1,7 @@
 package com.xiangxueketan.mvvm.v1.fragment.views.pictruetitleview;
 import android.content.Context;
+import android.view.View;
+
 import com.xiangxueketan.R;
 import com.xiangxueketan.databinding.PictureTitleViewBinding;
 import com.xiangxueketan.mvvm.v1.base.BaseView;
@@ -23,5 +25,10 @@ public class PictureView extends BaseView<PictureTitleViewBinding,PictureViewMod
     @Override
     public void bindDataToView(PictureViewModel pictureViewModel) {
         mBinding.setViewmodel(pictureViewModel);
+    }
+
+    @Override
+    public void onRootClickListener(View view) {
+
     }
 }

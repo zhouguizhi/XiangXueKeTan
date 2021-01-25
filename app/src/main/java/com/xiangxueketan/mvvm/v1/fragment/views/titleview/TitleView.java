@@ -1,5 +1,6 @@
 package com.xiangxueketan.mvvm.v1.fragment.views.titleview;
 import android.content.Context;
+import android.view.View;
 import com.xiangxueketan.R;
 import com.xiangxueketan.databinding.TitleViewBinding;
 import com.xiangxueketan.mvvm.v1.base.BaseView;
@@ -23,5 +24,10 @@ public class TitleView extends BaseView<TitleViewBinding,TitleViewModel>{
     @Override
     public void bindDataToView(TitleViewModel titleViewModel) {
         mBinding.setViewmodel(titleViewModel);
+    }
+
+    @Override
+    public void onRootClickListener(View view) {
+
     }
 }

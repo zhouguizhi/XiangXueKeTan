@@ -2,6 +2,7 @@ package com.xiangxueketan.mvvm.v1.base;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.LinearLayout;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
@@ -30,7 +31,10 @@ public abstract class BaseView<T extends ViewDataBinding,D extends BaseCustomVie
         this.mContext = context;
         layoutInflater = LayoutInflater.from(mContext);
         mBinding = DataBindingUtil.inflate(layoutInflater, layoutId(),this,false);
-        addView(mBinding.getRoot());
+        if(null!=mBinding){
+            addView(mBinding.getRoot());
+            mBinding.getRoot().setOnClickListener(this::onRootClickListener);
+        }
     }
     public abstract void init();
     public abstract int layoutId();
@@ -42,4 +46,5 @@ public abstract class BaseView<T extends ViewDataBinding,D extends BaseCustomVie
         this.mViewModel = data;
     }
     public abstract void bindDataToView(D d);
+    public abstract void onRootClickListener(View view);
 }
