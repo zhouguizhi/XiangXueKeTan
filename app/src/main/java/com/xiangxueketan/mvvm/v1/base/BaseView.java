@@ -41,9 +41,9 @@ public abstract class BaseView<T extends ViewDataBinding,D extends BaseCustomVie
 
     @Override
     public void setData(D data) {
+        this.mViewModel = data;
         bindDataToView(data);
         mBinding.executePendingBindings();
-        this.mViewModel = data;
     }
     public abstract void bindDataToView(D d);
     public abstract void onRootClickListener(View view);

@@ -25,7 +25,6 @@ public class TitleView extends BaseView<TitleViewBinding,TitleViewModel>{
     public void bindDataToView(TitleViewModel titleViewModel) {
         mBinding.setViewmodel(titleViewModel);
     }
-
     @Override
     public void onRootClickListener(View view) {
 
