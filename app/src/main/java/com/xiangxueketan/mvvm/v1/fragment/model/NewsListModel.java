@@ -4,6 +4,7 @@ import com.xiangxueketan.mvvm.v1.api.NewsApiInterface;
 import com.xiangxueketan.mvvm.v1.base.BaseCustomViewModel;
 import com.xiangxueketan.mvvm.v1.base.mvvm.model.IBaseModelListener;
 import com.xiangxueketan.mvvm.v1.bean.NewsListBean;
+import com.xiangxueketan.mvvm.v1.bean.PageResult;
 import com.xiangxueketan.mvvm.v1.fragment.views.pictruetitleview.PictureViewModel;
 import com.xiangxueketan.mvvm.v1.fragment.views.titleview.TitleViewModel;
 import com.xiangxueketan.mvvm.v1.net.TecentNetworkApi;
@@ -54,7 +55,7 @@ public class NewsListModel {
                             }
                         }
                         if(null!=iBaseModelListener){
-                            iBaseModelListener.onLoadSuccess(viewModelList);
+                            iBaseModelListener.onLoadSuccess(viewModelList,new PageResult(mPage==1,viewModelList.isEmpty(),viewModelList.size()>=10));
                         }
                     }
                     @Override

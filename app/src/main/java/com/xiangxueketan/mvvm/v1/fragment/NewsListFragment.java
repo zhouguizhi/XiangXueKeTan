@@ -8,6 +8,7 @@ import com.xiangxueketan.mvvm.v1.adapter.NewsListRecyclerViewAdapter;
 import com.xiangxueketan.mvvm.v1.base.BaseCustomViewModel;
 import com.xiangxueketan.mvvm.v1.base.BaseFragment;
 import com.xiangxueketan.mvvm.v1.base.mvvm.model.IBaseModelListener;
+import com.xiangxueketan.mvvm.v1.bean.PageResult;
 import com.xiangxueketan.mvvm.v1.fragment.model.NewsListModel;
 import java.util.ArrayList;
 import java.util.List;
@@ -49,8 +50,11 @@ public class NewsListFragment extends BaseFragment<FragmentNewsBinding> implemen
     }
 
     private void initData() {
-       channelId =  getArguments().getString(BUNDLE_KEY_PARAM_CHANNEL_ID);
-       channelName =  getArguments().getString(BUNDLE_KEY_PARAM_CHANNEL_NAME);
+       Bundle bundle =  getArguments();
+       if(null!=bundle){
+           channelId =   bundle.getString(BUNDLE_KEY_PARAM_CHANNEL_ID);
+           channelName = bundle.getString(BUNDLE_KEY_PARAM_CHANNEL_NAME);
+       }
        newsListModel = new NewsListModel(this,channelId,channelName);
     }
 
@@ -62,9 +66,7 @@ public class NewsListFragment extends BaseFragment<FragmentNewsBinding> implemen
     }
 
     private void initListener() {
-        mBinding.refreshLayout.setOnRefreshListener(refreshLayout -> {
-            newsListModel.refreshData();
-        });
+        mBinding.refreshLayout.setOnRefreshListener(refreshLayout -> newsListModel.refreshData());
         mBinding.refreshLayout.setOnLoadMoreListener(refreshLayout -> loadData());
     }
 
@@ -72,7 +74,10 @@ public class NewsListFragment extends BaseFragment<FragmentNewsBinding> implemen
         newsListModel.loadData();
     }
     @Override
-    public void onLoadSuccess(List<BaseCustomViewModel> viewModel) {
+    public void onLoadSuccess(List<BaseCustomViewModel> viewModel,PageResult... pageResults) {
+        if(null!=pageResults&&pageResults.length>0&&pageResults[0].isFirstPage()){
+            viewModelList.clear();
+        }
         loadFinish();
         viewModelList.addAll(viewModel);
         mAdapter.setData(viewModelList);

@@ -1,4 +1,5 @@
 package com.xiangxueketan.mvvm.v1.base.mvvm.model;
+import com.xiangxueketan.mvvm.v1.bean.PageResult;
 /**
  * @Description: 网络请求的回调
  * @Author: zhouguizhi
@@ -6,6 +7,6 @@ package com.xiangxueketan.mvvm.v1.base.mvvm.model;
  * @Version: 1.0
  */
 public interface IBaseModelListener<DATA> {
-    void onLoadSuccess(DATA data);
+    void onLoadSuccess(DATA data, PageResult... pageResults);
     void onLoadFail(Throwable throwable);
 }
