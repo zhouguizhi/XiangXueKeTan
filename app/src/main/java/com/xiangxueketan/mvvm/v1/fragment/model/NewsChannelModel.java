@@ -11,6 +11,10 @@ import com.xiangxueketan.mvvm.v1.net.observer.BaseObserver;
  * @Version: 1.0
  */
 public class NewsChannelModel extends BaseMVVMModel {
+    public NewsChannelModel(boolean isNeedPage) {
+        super(isNeedPage);
+    }
+    @Override
     public void loadData() {
         TecentNetworkApi.getService(NewsApiInterface.class)
                 .getNewsChannels()

@@ -30,7 +30,7 @@ public class HeadlineNewsFragment extends BaseFragment<FragmentHeadLineNewBindin
     }
 
     private void initViewModel() {
-        newsChannelModel = new NewsChannelModel();
+        newsChannelModel = new NewsChannelModel(false);
         newsChannelModel.register(this);
         newsChannelModel.loadData();
     }

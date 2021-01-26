@@ -20,6 +20,7 @@ public class NewsListModel extends BaseMVVMModel {
     private final String channelId;
     private final String channelName;
     public NewsListModel(String channelId,String channelName) {
+        super(true);
         this.channelId = channelId;
         this.channelName = channelName;
     }
@@ -27,6 +28,7 @@ public class NewsListModel extends BaseMVVMModel {
         mPage = 1;
         loadData();
     }
+    @Override
     public void loadData() {
         TecentNetworkApi.getService(NewsApiInterface.class)
                 .getNewsList(channelId,channelName,String.valueOf(mPage))
