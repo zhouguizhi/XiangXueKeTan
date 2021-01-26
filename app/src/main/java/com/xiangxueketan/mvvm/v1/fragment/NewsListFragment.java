@@ -5,14 +5,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.xiangxueketan.R;
 import com.xiangxueketan.databinding.FragmentNewsBinding;
 import com.xiangxueketan.mvvm.v1.adapter.NewsListRecyclerViewAdapter;
-import com.xiangxueketan.mvvm.v1.api.NewsApiInterface;
 import com.xiangxueketan.mvvm.v1.base.BaseCustomViewModel;
 import com.xiangxueketan.mvvm.v1.base.BaseFragment;
-import com.xiangxueketan.mvvm.v1.bean.NewsListBean;
-import com.xiangxueketan.mvvm.v1.fragment.views.pictruetitleview.PictureViewModel;
-import com.xiangxueketan.mvvm.v1.fragment.views.titleview.TitleViewModel;
-import com.xiangxueketan.mvvm.v1.net.TecentNetworkApi;
-import com.xiangxueketan.mvvm.v1.net.observer.BaseObserver;
+import com.xiangxueketan.mvvm.v1.base.mvvm.model.IBaseModelListener;
+import com.xiangxueketan.mvvm.v1.fragment.model.NewsListModel;
 import java.util.ArrayList;
 import java.util.List;
 /**
@@ -21,12 +17,16 @@ import java.util.List;
  * @CreateDate: 2021/1/24 下午5:38
  * @Version: 1.0
  */
-public class NewsListFragment extends BaseFragment<FragmentNewsBinding> {
+public class NewsListFragment extends BaseFragment<FragmentNewsBinding> implements IBaseModelListener<List<BaseCustomViewModel>> {
     protected final static String BUNDLE_KEY_PARAM_CHANNEL_ID = "bundle_key_param_channel_id";
     protected final static String BUNDLE_KEY_PARAM_CHANNEL_NAME = "bundle_key_param_channel_name";
     private List<BaseCustomViewModel> viewModelList = new ArrayList<>();
-    private int mPage = 1;
     private NewsListRecyclerViewAdapter mAdapter;
+    private NewsListModel newsListModel;
+    //
+    private String channelId;
+    private String channelName;
+
     public static Fragment newInstance(String channelId, String channelName) {
         NewsListFragment fragment = new NewsListFragment();
         Bundle bundle = new Bundle();
@@ -42,9 +42,16 @@ public class NewsListFragment extends BaseFragment<FragmentNewsBinding> {
     }
     @Override
     public void init() {
+        initData();
         initAdapter();
         initListener();
         loadData();
+    }
+
+    private void initData() {
+       channelId =  getArguments().getString(BUNDLE_KEY_PARAM_CHANNEL_ID);
+       channelName =  getArguments().getString(BUNDLE_KEY_PARAM_CHANNEL_NAME);
+       newsListModel = new NewsListModel(this,channelId,channelName);
     }
 
     private void initAdapter() {
@@ -56,47 +63,26 @@ public class NewsListFragment extends BaseFragment<FragmentNewsBinding> {
 
     private void initListener() {
         mBinding.refreshLayout.setOnRefreshListener(refreshLayout -> {
-            mPage = 0;
-            loadData();
+            newsListModel.refreshData();
         });
         mBinding.refreshLayout.setOnLoadMoreListener(refreshLayout -> loadData());
     }
 
     private void loadData() {
-        TecentNetworkApi.getService(NewsApiInterface.class)
-                .getNewsList(getArguments().getString(BUNDLE_KEY_PARAM_CHANNEL_ID),
-                        getArguments().getString(BUNDLE_KEY_PARAM_CHANNEL_NAME), String.valueOf(mPage))
-                .compose(TecentNetworkApi.getInstance().applySchedulers(new BaseObserver<NewsListBean>() {
-                    @Override
-                    public void onSuccess(NewsListBean newsChannelsBean) {
-                        if(mPage == 0) {
-                           viewModelList.clear();
-                        }
-                        for(NewsListBean.Contentlist contentlist:newsChannelsBean.showapiResBody.pagebean.contentlist){
-                            if(contentlist.imageurls!=null&&!contentlist.imageurls.isEmpty()){
-                                PictureViewModel pictureViewModel = new PictureViewModel();
-                                pictureViewModel.title = contentlist.title;
-                                pictureViewModel.jumpUrl = contentlist.link;
-                                pictureViewModel.pictureUrl = contentlist.imageurls.get(0).url;
-                                viewModelList.add(pictureViewModel);
-                            }else{
-                                TitleViewModel titleViewModel = new TitleViewModel();
-                                titleViewModel.title = contentlist.title;
-                                titleViewModel.jumpUrl = contentlist.link;
-                                viewModelList.add(titleViewModel);
-                            }
-                        }
-//                        contentlist.addAll(newsChannelsBean.showapiResBody.pagebean.contentlist);
-                        mAdapter.setData(viewModelList);
-                        mPage ++;
-                        mBinding.refreshLayout.finishRefresh();
-                        mBinding.refreshLayout.finishLoadMore();
-                    }
-
-                    @Override
-                    public void onFailure(Throwable e) {
-                        e.printStackTrace();
-                    }
-                }));
+        newsListModel.loadData();
+    }
+    @Override
+    public void onLoadSuccess(List<BaseCustomViewModel> viewModel) {
+        loadFinish();
+        viewModelList.addAll(viewModel);
+        mAdapter.setData(viewModelList);
+    }
+    @Override
+    public void onLoadFail(Throwable throwable) {
+        loadFinish();
+    }
+    public void loadFinish(){
+        mBinding.refreshLayout.finishRefresh();
+        mBinding.refreshLayout.finishLoadMore();
     }
 }
