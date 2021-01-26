@@ -6,6 +6,7 @@ import com.xiangxueketan.mvvm.v1.adapter.HeadlineNewsFragmentAdapter;
 import com.xiangxueketan.mvvm.v1.base.BaseFragment;
 import com.xiangxueketan.mvvm.v1.base.mvvm.model.IBaseModelListener;
 import com.xiangxueketan.mvvm.v1.bean.NewsChannelsBean;
+import com.xiangxueketan.mvvm.v1.bean.PageResult;
 import com.xiangxueketan.mvvm.v1.fragment.model.NewsChannelModel;
 import java.util.List;
 /**
@@ -29,7 +30,9 @@ public class HeadlineNewsFragment extends BaseFragment<FragmentHeadLineNewBindin
     }
 
     private void initViewModel() {
-        newsChannelModel = new NewsChannelModel(this);
+        newsChannelModel = new NewsChannelModel();
+        newsChannelModel.register(this);
+        newsChannelModel.loadData();
     }
     private void initViewPager() {
         mBinding.viewpager.setOffscreenPageLimit(1);
@@ -42,18 +45,12 @@ public class HeadlineNewsFragment extends BaseFragment<FragmentHeadLineNewBindin
         mBinding.tablayout.setupWithViewPager(mBinding.viewpager);
     }
     @Override
-    public void onLoadSuccess(List<NewsChannelsBean.ChannelList> channelLists) {
-//        Log.e("zhouguizhi", new Gson().toJson(channelLists));
-//        ArrayList<HeadlineNewsFragmentAdapter.Channel> channels = new ArrayList<>();
-//        for (NewsChannelsBean.ChannelList source : newsChannelsBean.showapiResBody.channelList) {
-//            HeadlineNewsFragmentAdapter.Channel channel = new HeadlineNewsFragmentAdapter.Channel();
-//            channel.channelId = source.channelId;
-//            channel.channelName = source.name;
-//            channels.add(channel);
-//        }
+    public void onLoadSuccess(List<NewsChannelsBean.ChannelList> channelLists, PageResult... pageResults) {
+        if(null==adapter){
+            return;
+        }
         adapter.setChannels(channelLists);
     }
-
     @Override
     public void onLoadFail(Throwable throwable) {
 

@@ -55,7 +55,8 @@ public class NewsListFragment extends BaseFragment<FragmentNewsBinding> implemen
            channelId =   bundle.getString(BUNDLE_KEY_PARAM_CHANNEL_ID);
            channelName = bundle.getString(BUNDLE_KEY_PARAM_CHANNEL_NAME);
        }
-       newsListModel = new NewsListModel(this,channelId,channelName);
+       newsListModel = new NewsListModel(channelId,channelName);
+        newsListModel.register(this);
     }
 
     private void initAdapter() {
@@ -75,6 +76,9 @@ public class NewsListFragment extends BaseFragment<FragmentNewsBinding> implemen
     }
     @Override
     public void onLoadSuccess(List<BaseCustomViewModel> viewModel,PageResult... pageResults) {
+        if(null==mAdapter){
+            return;
+        }
         if(null!=pageResults&&pageResults.length>0&&pageResults[0].isFirstPage()){
             viewModelList.clear();
         }
