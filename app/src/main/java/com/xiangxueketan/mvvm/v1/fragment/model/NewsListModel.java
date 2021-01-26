@@ -1,8 +1,7 @@
 package com.xiangxueketan.mvvm.v1.fragment.model;
-import androidx.annotation.NonNull;
 import com.xiangxueketan.mvvm.v1.api.NewsApiInterface;
 import com.xiangxueketan.mvvm.v1.base.BaseCustomViewModel;
-import com.xiangxueketan.mvvm.v1.base.mvvm.model.IBaseModelListener;
+import com.xiangxueketan.mvvm.v1.base.mvvm.model.BaseMVVMModel;
 import com.xiangxueketan.mvvm.v1.bean.NewsListBean;
 import com.xiangxueketan.mvvm.v1.bean.PageResult;
 import com.xiangxueketan.mvvm.v1.fragment.views.pictruetitleview.PictureViewModel;
@@ -17,16 +16,12 @@ import java.util.List;
  * @CreateDate: 2021/1/25 下午8:21
  * @Version: 1.0
  */
-public class NewsListModel {
+public class NewsListModel extends BaseMVVMModel {
     private final String channelId;
     private final String channelName;
-    private int mPage = 1;
-    private IBaseModelListener<List<BaseCustomViewModel>> iBaseModelListener;
-    public NewsListModel(@NonNull IBaseModelListener iBaseModelListener,String channelId,String channelName) {
-        this.iBaseModelListener = iBaseModelListener;
+    public NewsListModel(String channelId,String channelName) {
         this.channelId = channelId;
         this.channelName = channelName;
-        mPage = 1;
     }
     public void refreshData(){
         mPage = 1;
@@ -54,15 +49,15 @@ public class NewsListModel {
                                 viewModelList.add(titleViewModel);
                             }
                         }
-                        if(null!=iBaseModelListener){
-                            iBaseModelListener.onLoadSuccess(viewModelList,new PageResult(mPage==1,viewModelList.isEmpty(),viewModelList.size()>=10));
+                        if(null!=mWeakReference&&mWeakReference.get()!=null){
+                            mWeakReference.get().onLoadSuccess(viewModelList,new PageResult(mPage==1,viewModelList.isEmpty(),viewModelList.size()>=10));
                         }
                     }
                     @Override
                     public void onFailure(Throwable e) {
                         e.printStackTrace();
-                        if(null!=iBaseModelListener){
-                            iBaseModelListener.onLoadFail(e);
+                        if(null!=mWeakReference&&mWeakReference.get()!=null){
+                            mWeakReference.get().onLoadFail(e);
                         }
                     }
                 }));
