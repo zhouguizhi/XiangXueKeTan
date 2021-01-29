@@ -8,13 +8,11 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
         <TextView
-            android:id="@+id/tv_hook"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:text="hook测试"
+            android:layout_height="match_parent"
             android:gravity="center"
-            android:background="@color/colorPrimary" />
+            android:text="ioc"
+            />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

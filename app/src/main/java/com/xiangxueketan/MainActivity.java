@@ -2,11 +2,16 @@ package com.xiangxueketan;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.TextView;
 import com.hjq.permissions.OnPermissionCallback;
 import com.hjq.permissions.Permission;
 import com.hjq.permissions.XXPermissions;
+import com.xiangxueketan.ioc.IOCActivity;
 import com.xiangxueketan.jetpack.databinding.DataBindingActivity;
 import com.xiangxueketan.glide.GlideActivity;
 import com.xiangxueketan.hook.HookActivity;
@@ -14,7 +19,7 @@ import com.xiangxueketan.jetpack.lifecycle.LifeCycleActivity;
 import com.xiangxueketan.jetpack.livedata.LiveDataActivity;
 import com.xiangxueketan.jetpack.livedata.LiveDataBus;
 import com.xiangxueketan.mvvm.v1.ui.MVVMActivity;
-import com.zgz.reflect.Person;
+import com.xiangxueketan.skin.SkinActivity;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -23,6 +28,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         checkPermission();
+        FrameLayout frameLayout = (FrameLayout) getWindow().getDecorView();
+        TextView textView = new TextView(this);
+        textView.setText("我是新添加的");
+        textView.setGravity(Gravity.CENTER);
+        textView.setTextSize(20);
+        textView.setTextColor(Color.RED);
+        textView.setBackgroundColor(Color.BLUE);
+        FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, 300);
+        layoutParams.topMargin = 100;
+        textView.setLayoutParams(layoutParams);
+//        frameLayout.addView(textView);
     }
     public void checkPermission(){
         XXPermissions.with(this)
@@ -78,5 +94,13 @@ public class MainActivity extends AppCompatActivity {
 //                toast("用户没有在权限设置页授予权限");
             }
         }
+    }
+
+    public void onSkinClickListener(View view) {
+        startActivity(new Intent(this, SkinActivity.class));
+    }
+
+    public void onIocClickListener(View view) {
+        startActivity(new Intent(this, IOCActivity.class));
     }
 }

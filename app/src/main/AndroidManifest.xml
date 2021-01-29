@@ -30,5 +30,7 @@
         <activity android:name=".jetpack.databinding.DataBindingActivity"/>
         <activity android:name=".mvvm.v1.ui.EnvironmentActivity"/>
         <activity android:name=".mvvm.v1.ui.MVVMActivity"/>
+        <activity android:name=".skin.SkinActivity"/>
+        <activity android:name=".ioc.IOCActivity"/>
     </application>
 </manifest>
