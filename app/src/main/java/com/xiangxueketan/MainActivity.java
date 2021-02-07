@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -30,6 +31,14 @@ public class MainActivity extends AppCompatActivity {
         checkPermission();
         FrameLayout frameLayout = (FrameLayout) getWindow().getDecorView();
         TextView textView = new TextView(this);
+        textView.setOnClickListener(v -> {
+            Log.e("zhouguizhi","xx");
+            Log.e("zhouguizhi","xx");
+        });
+        //lambda表达式的写法
+        textView.setOnClickListener(v-> {
+            Log.e("zhouguizhi","xx");
+        });
         textView.setText("我是新添加的");
         textView.setGravity(Gravity.CENTER);
         textView.setTextSize(20);
