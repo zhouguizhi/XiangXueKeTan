@@ -32,5 +32,6 @@
         <activity android:name=".mvvm.v1.ui.MVVMActivity"/>
         <activity android:name=".skin.SkinActivity"/>
         <activity android:name=".ioc.IOCActivity"/>
+        <activity android:name=".ioc.reflect.ReflectWayImplIocActivity"/>
     </application>
 </manifest>

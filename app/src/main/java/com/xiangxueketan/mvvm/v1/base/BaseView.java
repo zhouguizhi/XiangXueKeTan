@@ -38,7 +38,6 @@ public abstract class BaseView<T extends ViewDataBinding,D extends BaseCustomVie
     }
     public abstract void init();
     public abstract int layoutId();
-
     @Override
     public void setData(D data) {
         this.mViewModel = data;
